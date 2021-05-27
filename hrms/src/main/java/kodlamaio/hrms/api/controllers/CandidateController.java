@@ -13,6 +13,7 @@ import kodlamaio.hrms.business.abstracts.CandidateService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.Candidate;
+import kodlamaio.hrms.entities.dtos.CandidateForRegisterDto;
 
 @RestController
 @RequestMapping("/api/candidates")
@@ -21,8 +22,8 @@ public class CandidateController {
 	private CandidateService candidateService;
 
 	@PostMapping("/add")
-	public Result add(@RequestBody Candidate candidate) {
-		return this.candidateService.add(candidate);
+	public Result add(@RequestBody CandidateForRegisterDto candidateForRegisterDto) {
+		return this.candidateService.add(candidateForRegisterDto);
 	}
 
 	@GetMapping("/getall")

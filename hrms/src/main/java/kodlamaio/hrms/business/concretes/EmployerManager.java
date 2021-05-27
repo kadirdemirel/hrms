@@ -15,6 +15,8 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.entities.concretes.Employer;
+import kodlamaio.hrms.entities.dtos.EmployerForRegisterDto;
+import lombok.var;
 
 @Service
 public class EmployerManager implements EmployerService {
@@ -27,28 +29,38 @@ public class EmployerManager implements EmployerService {
 	EmployeService employeService;
 
 	@Override
-	public Result add(Employer employer) {
+	public Result add(EmployerForRegisterDto employerForRegisterDto) {
+		var employer = new Employer();
+		employer.setId(employerForRegisterDto.getId());
+		employer.setCompanyName(employerForRegisterDto.getCompanyName());
+		employer.setWebAddress(employerForRegisterDto.getWebAddress());
+		employer.setEmailAddress(employerForRegisterDto.getEmailAddress());
+		employer.setPassword(employerForRegisterDto.getPassword());
 
-		if (employer.getCompanyName() != null && employer.getEmailAddress() != null && employer.getPassword() != null
-				&& employer.getWebAddress() != null) {
-			this.employerDao.save(employer);
-			if (verificationLink()) {
+		if (employer.getPassword().equals(employerForRegisterDto.getRepeatPassword())) {
+			if (employer.getCompanyName() != null && employer.getEmailAddress() != null
+					&& employer.getPassword() != null && employer.getWebAddress() != null) {
 				this.employerDao.save(employer);
-				return new SuccessResult("Kullanıcı başarıyla eklendi");
-			}
+				if (verificationLink()) {
+					this.employerDao.save(employer);
+					return new SuccessResult("Kullanıcı başarıyla eklendi");
+				}
 
-			else if (this.employeService.confirm(employer) != null) {
+				else if (this.employeService.confirm(employer) != null) {
 
-				this.employerDao.save(employer);
-				return new SuccessResult("Kullanıcı başarıyla eklendi");
+					this.employerDao.save(employer);
+					return new SuccessResult("Kullanıcı başarıyla eklendi");
+
+				} else {
+					return new ErrorResult("Kullanıcı doğrulama linkine tıklamadığı için kaydı geçersiz sayıldı.");
+				}
 
 			} else {
-				return new ErrorResult("Kullanıcı doğrulama linkine tıklamadığı için kaydı geçersiz sayıldı.");
+
+				return new ErrorResult("Bütün alanların doldurulması zorunludur !");
 			}
-
 		} else {
-
-			return new ErrorResult("Bütün alanların doldurulması zorunludur !");
+			return new ErrorResult("Yazdığınız şifreler birbiriyle uyuşmuyor lütfen kontrol ediniz.");
 		}
 
 	}
@@ -68,5 +80,6 @@ public class EmployerManager implements EmployerService {
 			return false;
 		}
 	}
+
 
 }

@@ -1,5 +1,6 @@
 package kodlamaio.hrms.business.concretes;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.dataAccess.abstracts.CandidateDao;
 
 import kodlamaio.hrms.entities.concretes.Candidate;
+import kodlamaio.hrms.entities.dtos.CandidateForRegisterDto;
+import lombok.var;
 
 @Service
 public class CandidateManager implements CandidateService {
@@ -28,21 +31,33 @@ public class CandidateManager implements CandidateService {
 	VerificationEmailService verificationEmailService;
 
 	@Override
-	public Result add(Candidate candidate) {
-
+	public Result add(CandidateForRegisterDto candidateForRegisterDto) {
+		var candidate = new Candidate();
+		candidate.setId(candidateForRegisterDto.getId());
+		candidate.setFirstName(candidateForRegisterDto.getFirstName());
+		candidate.setLastName(candidateForRegisterDto.getLastName());
+		candidate.setBirthDate(LocalDate.parse(candidateForRegisterDto.getBirthDate()));
+		candidate.setIdentificationNumber(candidateForRegisterDto.getIdentificationNumber());
+		candidate.setEmailAddress(candidateForRegisterDto.getEmailAddress());
+		candidate.setPassword(candidateForRegisterDto.getPassword());
 		if (mandatoryField(candidate)) {
 			if (identificationNumberAndEmail(candidate)) {
+				if (candidate.getPassword() == candidateForRegisterDto.getRepeatPassword()) {
+					if (this.candidateCheckService.CheckIfRealPerson(candidate)) {
 
-				if (this.candidateCheckService.CheckIfRealPerson(candidate)) {
+						if (verificationLink()) {
+							this.candidateDao.save(candidate);
 
-					if (verificationLink()) {
-						this.candidateDao.save(candidate);
+						} else {
+							return new ErrorResult("Kullanıcı doğrulama linkine tıklamadığı için kayıt başarısız !");
+						}
 
-					} else {
-						return new ErrorResult("Kullanıcı doğrulama linkine tıklamadığı için kayıt başarısız !");
 					}
+				} else {
 
+					return new ErrorResult("Yazdığınız şifreler birbiriyle uyuşmuyor lütfen kontrol ediniz.");
 				}
+
 			} else {
 				return new ErrorResult("Email veya TC Kimlik numaranız sistemde zaten kayıtlı !");
 			}
