@@ -14,7 +14,9 @@ import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
+
 import kodlamaio.hrms.entities.concretes.Employer;
+
 import kodlamaio.hrms.entities.dtos.EmployerForRegisterDto;
 import lombok.var;
 
@@ -27,6 +29,7 @@ public class EmployerManager implements EmployerService {
 	VerificationEmailService verificationEmailService;
 	@Autowired
 	EmployeService employeService;
+
 
 	@Override
 	public Result add(EmployerForRegisterDto employerForRegisterDto) {
@@ -80,6 +83,5 @@ public class EmployerManager implements EmployerService {
 			return false;
 		}
 	}
-
 
 }
