@@ -1,6 +1,7 @@
 package kodlamaio.hrms.entities.concretes;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,27 +21,21 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "job_titles")
+@Table(name = "languages")
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "jobPostings", "employerJobTitles" })
-public class JobTitle {
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "languageLevels" })
+public class Language {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 
-	@Column(name = "title")
-	private String title;
+	@Column(name = "language_name")
+	private String languageName;
 
-	@Column(name = "job_description")
-	private String jobDescription;
-
-	@OneToMany(mappedBy = "jobTitle")
-	private List<JobPosting> jobPostings;
-
-	@OneToMany(mappedBy = "jobTitle")
-	private List<EmployerJobTitle> employerJobTitles;
+	@OneToMany(mappedBy = "language")
+	private List<LanguageLevel> languageLevels;
 
 }

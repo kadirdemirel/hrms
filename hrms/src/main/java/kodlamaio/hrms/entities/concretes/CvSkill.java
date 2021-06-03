@@ -14,33 +14,28 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.NoArgsConstructor;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "job_titles")
+@Table(name = "cv_skills")
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "jobPostings", "employerJobTitles" })
-public class JobTitle {
 
+public class CvSkill {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 
-	@Column(name = "title")
-	private String title;
+	@ManyToOne()
+	@JoinColumn(name = "skill_id")
+	private Skill skill;
 
-	@Column(name = "job_description")
-	private String jobDescription;
-
-	@OneToMany(mappedBy = "jobTitle")
-	private List<JobPosting> jobPostings;
-
-	@OneToMany(mappedBy = "jobTitle")
-	private List<EmployerJobTitle> employerJobTitles;
-
+	@ManyToOne()
+	@JoinColumn(name = "cv_id")
+	private Cv cv;
 }

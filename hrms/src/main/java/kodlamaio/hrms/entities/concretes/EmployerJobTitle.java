@@ -1,5 +1,9 @@
 package kodlamaio.hrms.entities.concretes;
 
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,9 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,27 +21,25 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "job_titles")
+@Table(name = "employer_job_titles")
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "jobPostings", "employerJobTitles" })
-public class JobTitle {
 
+public class EmployerJobTitle {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 
-	@Column(name = "title")
-	private String title;
+	@ManyToOne()
+	@JoinColumn(name = "employer_id")
+	private Employer employer;
 
-	@Column(name = "job_description")
-	private String jobDescription;
+	@ManyToOne()
+	@JoinColumn(name = "jobTitle_id")
+	private JobTitle jobTitle;
 
-	@OneToMany(mappedBy = "jobTitle")
-	private List<JobPosting> jobPostings;
-
-	@OneToMany(mappedBy = "jobTitle")
-	private List<EmployerJobTitle> employerJobTitles;
-
+	@ManyToOne()
+	@JoinColumn(name = "cv_id")
+	private Cv cv;
 }
