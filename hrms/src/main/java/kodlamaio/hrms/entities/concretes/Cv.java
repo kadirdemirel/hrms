@@ -5,14 +5,19 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
 
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sun.istack.Nullable;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,8 +28,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "cvs")
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "schoolSections", "languageLevels", "employerJobTitles",
-		"images" })
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "schoolSections", "languageLevels",
+		"employerJobTitles" })
 public class Cv {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,12 +63,15 @@ public class Cv {
 	private List<SchoolSection> schoolSections;
 
 	@OneToMany(mappedBy = "cv")
-	private List<EmployerJobTitle> employerJobTitles;
-
-	@OneToMany(mappedBy = "cv")
-	private List<Image> images;
-
-	@OneToMany(mappedBy = "cv")
 	private List<CvSkill> cvSkills;
+
+	@OneToOne(optional = false, fetch = FetchType.LAZY)
+	@JoinColumn(name = "candidate_id")
+	private Candidate candidate;
+
+	@Nullable
+	@JsonIgnore
+	@OneToOne(mappedBy = "cv", optional = true, fetch = FetchType.LAZY)
+	private Image image;
 
 }

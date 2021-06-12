@@ -4,8 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -38,7 +37,6 @@ public class Employer extends User {
 	@OneToMany(mappedBy = "employer")
 	private List<JobPosting> jobPostings;
 
-	@OneToMany(mappedBy = "employer")
-	private List<EmployerJobTitle> employerJobTitles;
+
 
 }
