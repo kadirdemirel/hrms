@@ -13,6 +13,7 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.CvDao;
 import kodlamaio.hrms.entities.concretes.Cv;
+import net.bytebuddy.asm.Advice.This;
 
 @Service
 public class CvManager implements CvService {
@@ -37,6 +38,11 @@ public class CvManager implements CvService {
 	public Result add(Cv cv) {
 		this.cvDao.save(cv);
 		return new SuccessResult("Cv ekleme başarılı");
+	}
+
+	@Override
+	public DataResult<List<Cv>> getAll() {
+		return new SuccessDataResult<List<Cv>>(this.cvDao.findAll());
 	}
 
 }

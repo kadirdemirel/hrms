@@ -28,8 +28,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "cvs")
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "schoolSections", "languageLevels",
-		"employerJobTitles" })
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "schoolSections", "languageLevels", "cvSkills",
+		"image" })
 public class Cv {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -70,7 +70,6 @@ public class Cv {
 	private Candidate candidate;
 
 	@Nullable
-	@JsonIgnore
 	@OneToOne(mappedBy = "cv", optional = true, fetch = FetchType.LAZY)
 	private Image image;
 
