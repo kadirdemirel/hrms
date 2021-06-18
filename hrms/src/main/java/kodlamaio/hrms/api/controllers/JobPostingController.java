@@ -3,6 +3,7 @@ package kodlamaio.hrms.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,7 +45,7 @@ public class JobPostingController {
 	}
 
 	@GetMapping("/getallstatusanddate")
-	public DataResult<List<JobPosting>> getByStatus2(boolean status) {
+	public DataResult<List<JobPosting>> getByStatus2(int status) {
 		return this.jobPostingService.getAllStatusAndDate(status);
 	}
 

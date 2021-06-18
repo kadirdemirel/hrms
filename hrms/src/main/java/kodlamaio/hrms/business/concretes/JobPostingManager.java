@@ -29,13 +29,13 @@ public class JobPostingManager implements JobPostingService {
 
 	@Override
 	public DataResult<List<JobPosting>> getAll() {
-
+	
 		return new SuccessDataResult<List<JobPosting>>(this.jobPostingDao.findAll());
 	}
 
 	@Override
-	public DataResult<List<JobPosting>> getAllStatusAndDate(boolean status) {
-		Sort sort = Sort.by(Sort.Direction.ASC, "lastDate");
+	public DataResult<List<JobPosting>> getAllStatusAndDate(int status) {
+		Sort sort = Sort.by(Sort.Direction.DESC, "lastDate");
 		return new SuccessDataResult<List<JobPosting>>(this.jobPostingDao.getByStatus(status, sort));
 	}
 

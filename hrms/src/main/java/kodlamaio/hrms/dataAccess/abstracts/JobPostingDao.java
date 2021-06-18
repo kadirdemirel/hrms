@@ -15,7 +15,7 @@ import kodlamaio.hrms.entities.concretes.JobPosting;
 public interface JobPostingDao extends JpaRepository<JobPosting, Integer> {
 	List<JobPosting> getByStatus(int status);
 
-	List<JobPosting> getByStatus(boolean status, Sort sort);
+	List<JobPosting> getByStatus(int status, Sort sort);
 
 	List<JobPosting> getByStatusAndEmployerId(int status, int id);
 

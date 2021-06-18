@@ -2,6 +2,8 @@ package kodlamaio.hrms.business.abstracts;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
+
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 
@@ -14,7 +16,7 @@ public interface JobPostingService {
 
 	DataResult<List<JobPosting>> getByStatus(int status);
 
-	DataResult<List<JobPosting>> getAllStatusAndDate(boolean status);
+	DataResult<List<JobPosting>> getAllStatusAndDate(int status);
 
 	DataResult<List<JobPosting>> getByStatusAndEmployerId(int status, int employerId);
 
