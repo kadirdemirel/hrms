@@ -34,18 +34,13 @@ public class JobPostingManager implements JobPostingService {
 	}
 
 	@Override
-	public DataResult<List<JobPosting>> getByStatus(@RequestParam("status") boolean status) {
-		return new SuccessDataResult<List<JobPosting>>(this.jobPostingDao.getByStatus(status));
-	}
-
-	@Override
 	public DataResult<List<JobPosting>> getAllStatusAndDate(boolean status) {
 		Sort sort = Sort.by(Sort.Direction.ASC, "lastDate");
 		return new SuccessDataResult<List<JobPosting>>(this.jobPostingDao.getByStatus(status, sort));
 	}
 
 	@Override
-	public DataResult<List<JobPosting>> getByStatusAndEmployerId(boolean status, int employerId) {
+	public DataResult<List<JobPosting>> getByStatusAndEmployerId(int status, int employerId) {
 		return new SuccessDataResult<List<JobPosting>>(this.jobPostingDao.getByStatusAndEmployerId(status, employerId));
 	}
 
@@ -55,5 +50,15 @@ public class JobPostingManager implements JobPostingService {
 		return new SuccessResult();
 	}
 
-	
+	@Override
+	public DataResult<List<JobPosting>> getByStatus(@RequestParam("status") int status) {
+		return new SuccessDataResult<List<JobPosting>>(this.jobPostingDao.getByStatus(status));
+	}
+
+	@Override
+	public Result updateStatus(int status, int id) {
+		this.jobPostingDao.updateStatus(status, id);
+		return new SuccessResult();
+	}
+
 }

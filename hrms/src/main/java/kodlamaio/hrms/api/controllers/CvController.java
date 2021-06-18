@@ -32,4 +32,9 @@ public class CvController {
 	public DataResult<List<Cv>> getAll() {
 		return this.cvService.getAll();
 	}
+
+	@GetMapping("/getById")
+	public DataResult<Cv> getById(int id) {
+		return this.cvService.getById(id);
+	}
 }

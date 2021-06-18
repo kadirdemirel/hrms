@@ -9,9 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.models.Swagger;
 import kodlamaio.hrms.business.abstracts.JobPostingService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
@@ -27,10 +28,9 @@ public class JobPostingController {
 	JobPostingService jobPostingService;
 
 	@PostMapping("/add")
-
 	public Result add(@RequestBody JobPosting jobPosting) {
-		this.jobPostingService.add(jobPosting);
-		return new SuccessResult("başarışı");
+
+		return this.jobPostingService.add(jobPosting);
 	}
 
 	@GetMapping("/getall")
@@ -39,7 +39,7 @@ public class JobPostingController {
 	}
 
 	@GetMapping("/getalltrue")
-	public DataResult<List<JobPosting>> getByStatus(boolean status) {
+	public DataResult<List<JobPosting>> getByStatus(int status) {
 		return this.jobPostingService.getByStatus(status);
 	}
 
@@ -49,14 +49,20 @@ public class JobPostingController {
 	}
 
 	@GetMapping("/getbystatusandemployer")
-	public DataResult<List<JobPosting>> getByStatusAndEmployerId(boolean status, int employerId) {
+	public DataResult<List<JobPosting>> getByStatusAndEmployerId(int status, int employerId) {
 		return this.jobPostingService.getByStatusAndEmployerId(status, employerId);
 	}
 
 	@PostMapping("/update")
 	public Result updateStatus(@RequestBody JobPosting jobPosting) {
-		this.jobPostingService.Update(jobPosting);
-		return new SuccessResult("başarılı");
+		return this.jobPostingService.Update(jobPosting);
+
+	}
+
+	@PostMapping("/statusUpdate")
+	public Result updateStatus(@RequestParam("status") int status, @RequestParam("id") int id) {
+		return this.jobPostingService.updateStatus(status, id);
+
 	}
 
 }

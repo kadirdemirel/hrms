@@ -13,7 +13,7 @@ public interface ImageService {
 
 	Result add(Image image);
 
-	DataResult<List<Image>> getAllByCandidateId(int imageId);
+	DataResult<List<Image>> getAllByCvId(int imageId);
 
 	Result addAll(List<Image> image);
 

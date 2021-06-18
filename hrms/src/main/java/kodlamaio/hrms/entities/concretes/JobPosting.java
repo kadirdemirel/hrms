@@ -29,6 +29,9 @@ public class JobPosting {
 	@Column(name = "id")
 	private int id;
 
+	@Column(name = "job_description")
+	private String jobDescription;
+	
 	@Column(name = "min_salary")
 	private int minSalary;
 	@Column(name = "max_salary")
@@ -38,7 +41,7 @@ public class JobPosting {
 	@Column(name = "last_date")
 	private LocalDate lastDate;
 	@Column(name = "status")
-	private boolean status;
+	private int status;
 
 	@ManyToOne()
 	@JoinColumn(name = "jobtitle_id")
@@ -51,5 +54,13 @@ public class JobPosting {
 	@ManyToOne()
 	@JoinColumn(name = "employer_id")
 	private Employer employer;
+	
+	@ManyToOne()
+	@JoinColumn(name = "typeOfWork_id")
+	private TypeOfWork typeOfWork;
+	
+	@ManyToOne()
+	@JoinColumn(name = "workingTime_id")
+	private WorkingTime workingTime;
 
 }
