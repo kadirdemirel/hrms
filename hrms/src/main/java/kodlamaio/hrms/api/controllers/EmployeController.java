@@ -3,7 +3,7 @@ package kodlamaio.hrms.api.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +14,7 @@ import kodlamaio.hrms.entities.concretes.Employe;
 
 @RestController
 @RequestMapping("/api/employees")
+@CrossOrigin
 public class EmployeController {
 
 	@Autowired

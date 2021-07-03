@@ -2,12 +2,11 @@ package kodlamaio.hrms.business.abstracts;
 
 import java.util.List;
 
-import org.springframework.data.domain.Sort;
-
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 
 import kodlamaio.hrms.entities.concretes.JobPosting;
+import kodlamaio.hrms.entities.dtos.PageableDto;
 
 public interface JobPostingService {
 	Result add(JobPosting jobPosting);
@@ -21,9 +20,12 @@ public interface JobPostingService {
 	DataResult<List<JobPosting>> getByStatusAndEmployerId(int status, int employerId);
 
 	Result Update(JobPosting jobPosting);
-	
-	Result updateStatus(int status,int id);
 
+	Result updateStatus(int status, int id);
 
+	DataResult<JobPosting> getById(int id);
 
+	DataResult<PageableDto<List<JobPosting>>> getAll(int pageNo, int pageSize);
+
+	DataResult<List<JobPosting>> getByCityIdAndTypeOfWorkId(int cityId, int typeOfWorkId);
 }

@@ -19,6 +19,10 @@ public interface JobPostingDao extends JpaRepository<JobPosting, Integer> {
 
 	List<JobPosting> getByStatusAndEmployerId(int status, int id);
 
+	List<JobPosting> getByCityIdAndTypeOfWorkId(int cityId, int typeOfWorkId);
+
+	JobPosting getById(int id);
+
 	@Modifying
 	@Transactional
 	@Query("update JobPosting set status=:status where id=:id ")

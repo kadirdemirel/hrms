@@ -3,7 +3,7 @@ package kodlamaio.hrms.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,13 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.models.Swagger;
 import kodlamaio.hrms.business.abstracts.JobPostingService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
-import kodlamaio.hrms.core.utilities.results.SuccessResult;
 
 import kodlamaio.hrms.entities.concretes.JobPosting;
+import kodlamaio.hrms.entities.dtos.PageableDto;
 
 @RestController
 @RequestMapping("/api/jobpostings")
@@ -64,6 +63,21 @@ public class JobPostingController {
 	public Result updateStatus(@RequestParam("status") int status, @RequestParam("id") int id) {
 		return this.jobPostingService.updateStatus(status, id);
 
+	}
+
+	@GetMapping("/getById")
+	public DataResult<JobPosting> getById(int id) {
+		return this.jobPostingService.getById(id);
+	}
+
+	@GetMapping("/getAllByPage")
+	DataResult<PageableDto<List<JobPosting>>> getAll(int pageNo, int pageSize) {
+		return this.jobPostingService.getAll(pageNo, pageSize);
+	}
+
+	@GetMapping("/getByCityIdAndTypeOfWorkId")
+	DataResult<List<JobPosting>> getByCityIdAndTypeOfWorkId(int cityId, int typeOfWorkId) {
+		return this.jobPostingService.getByCityIdAndTypeOfWorkId(cityId, typeOfWorkId);
 	}
 
 }

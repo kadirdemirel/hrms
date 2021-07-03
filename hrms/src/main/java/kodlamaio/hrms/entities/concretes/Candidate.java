@@ -1,12 +1,12 @@
 package kodlamaio.hrms.entities.concretes;
 
 import java.time.LocalDate;
-
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "candidates")
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "cvs" })
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "myFavourites" })
 public class Candidate extends User {
 
 	@Column(name = "first_name")
@@ -42,5 +42,8 @@ public class Candidate extends User {
 	@JsonIgnore
 	@OneToOne(mappedBy = "candidate", optional = true, fetch = FetchType.LAZY)
 	private Cv cv;
+	
+	@OneToMany(mappedBy = "candidate")
+	private List<MyFavourite> myFavourites;
 
 }
