@@ -59,9 +59,15 @@ public class ImageManager implements ImageService {
 		String url = result.get("url");
 		image.setUrl(url);
 		image.setUploadedDate(LocalDate.now());
-	
+
 		return add(image);
 
 	}
+
+//	@Override
+//	public Result imageUpdate(String url, int id) {
+//		this.imageDao.imageUpdate(url, id);
+//		return new SuccessResult("Fotoğraf güncellendi");
+//	}
 
 }

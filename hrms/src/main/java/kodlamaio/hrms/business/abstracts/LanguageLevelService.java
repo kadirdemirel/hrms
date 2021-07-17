@@ -7,11 +7,12 @@ import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.LanguageLevel;
 import kodlamaio.hrms.entities.dtos.LanguageLevelDto;
 
-
 public interface LanguageLevelService {
-	public DataResult<List<LanguageLevel>> getAll();
+	DataResult<List<LanguageLevel>> getAll();
 
-	public Result add(LanguageLevel languageLevel);
+	Result add(LanguageLevel languageLevel);
 
 	DataResult<List<LanguageLevelDto>> getLanguageLevelDetails(int cvId);
+
+	Result languageLevel(int languageId, int levelId, int id);
 }

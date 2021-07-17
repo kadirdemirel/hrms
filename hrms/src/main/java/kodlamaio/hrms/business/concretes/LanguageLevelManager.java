@@ -35,4 +35,10 @@ public class LanguageLevelManager implements LanguageLevelService {
 		return new SuccessDataResult<List<LanguageLevelDto>>(this.languageLevelDao.getLanguageLevelDto(cvId));
 	}
 
+	@Override
+	public Result languageLevel(int languageId, int levelId, int id) {
+		this.languageLevelDao.languageLevel(languageId, levelId, id);
+		return new SuccessResult("Yabancı dil bilgisi güncellendi");
+	}
+
 }

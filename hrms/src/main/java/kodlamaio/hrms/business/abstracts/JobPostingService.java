@@ -2,6 +2,10 @@ package kodlamaio.hrms.business.abstracts;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
+
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 
@@ -23,9 +27,12 @@ public interface JobPostingService {
 
 	Result updateStatus(int status, int id);
 
+
 	DataResult<JobPosting> getById(int id);
 
-	DataResult<PageableDto<List<JobPosting>>> getAll(int pageNo, int pageSize);
+    DataResult<List<JobPosting>> getByFilter(int pageNo, int pageSize, PageableDto pageableDto);
+//	DataResult<PageableDto<List<JobPosting>>> getAll(int pageNo, int pageSize);
+//	DataResult<PageableDto<List<JobPosting>>> getByCityIdAndTypeOfWorkId(int cityId,int typeOfWorkId,int pageNo,int pageSize);
 
-	DataResult<List<JobPosting>> getByCityIdAndTypeOfWorkId(int cityId, int typeOfWorkId);
+//	DataResult<List<JobPosting>> getByCityIdAndTypeOfWorkId(int cityId, int typeOfWorkId);
 }

@@ -70,14 +70,27 @@ public class JobPostingController {
 		return this.jobPostingService.getById(id);
 	}
 
-	@GetMapping("/getAllByPage")
-	DataResult<PageableDto<List<JobPosting>>> getAll(int pageNo, int pageSize) {
-		return this.jobPostingService.getAll(pageNo, pageSize);
-	}
+//	@GetMapping("/getAllByPage")
+//	DataResult<PageableDto<List<JobPosting>>> getAll(int pageNo, int pageSize) {
+//		
+//		return this.jobPostingService.getAll(pageNo, pageSize);
+//	}
 
-	@GetMapping("/getByCityIdAndTypeOfWorkId")
-	DataResult<List<JobPosting>> getByCityIdAndTypeOfWorkId(int cityId, int typeOfWorkId) {
-		return this.jobPostingService.getByCityIdAndTypeOfWorkId(cityId, typeOfWorkId);
+	// @GetMapping("/getByCityIdAndTypeOfWorkId")
+	// DataResult<List<JobPosting>> getByCityIdAndTypeOfWorkId(int cityId, int
+	// typeOfWorkId) {
+	// return this.jobPostingService.getByCityIdAndTypeOfWorkId(cityId,
+	// typeOfWorkId);
+//	}
+
+	@PostMapping("/getByFilter")
+	public Result getByFilter(@RequestParam int pageNo, @RequestParam int pageSize,
+			@RequestBody PageableDto pageableDto) {
+		System.out.println(pageNo);
+		System.out.println(pageSize);
+		System.out.println(pageableDto);
+		return jobPostingService.getByFilter(pageNo, pageSize, pageableDto);
+		
 	}
 
 }

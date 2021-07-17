@@ -1,5 +1,6 @@
 package kodlamaio.hrms.business.concretes;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,15 @@ public class CvManager implements CvService {
 	@Override
 	public DataResult<Cv> getById(int id) {
 		return new SuccessDataResult<Cv>(this.cvDao.getById(id));
+	}
+
+	@Override
+	public Result updateCv(String gitHubAddress, String linkedlnAddress, String coverLetter, LocalDate yearOfEntry,
+			LocalDate yearOfGraduation, LocalDate yearOfEmployment, LocalDate yearOff, int id) {
+		
+		this.cvDao.updateCv(gitHubAddress, linkedlnAddress, coverLetter, yearOfEntry, yearOfGraduation,
+				yearOfEmployment, yearOff, id);
+		return new SuccessResult("Cv bilgisi başarıyla güncellendi");
 	}
 
 }

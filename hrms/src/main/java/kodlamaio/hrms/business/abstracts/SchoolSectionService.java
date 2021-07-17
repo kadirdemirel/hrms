@@ -15,4 +15,6 @@ public interface SchoolSectionService {
 	Result add(SchoolSection scholSection);
 
 	DataResult<List<SchoolSectionDto>> getSchoolSectionDetails(int cvId);
+	
+	Result  updateSchoolSection(int schoolId,int sectionId,int id);
 }

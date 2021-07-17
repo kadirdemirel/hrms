@@ -2,6 +2,8 @@ package kodlamaio.hrms.entities.dtos;
 
 
 
+
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -11,11 +13,9 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-public class PageableDto<T> {
+public class PageableDto {
 	
 
-	private int pageNo;
-	private int pageSize;
-	private int section;
-	private T listData;
+	private int cityId;
+	private int typeOfWorkId;
 }

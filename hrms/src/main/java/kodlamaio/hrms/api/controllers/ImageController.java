@@ -45,4 +45,6 @@ public class ImageController {
 	public ResponseEntity<?> getAllByCvId(int cvId) {
 		return ResponseEntity.ok(this.imageService.getAllByCvId(cvId));
 	}
+	
+
 }

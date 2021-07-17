@@ -35,4 +35,10 @@ public class CvSkillManager implements CvSkillService {
 	public DataResult<List<CvSkillDto>> getCvSkillDetails(int cvId) {
 		return new SuccessDataResult<List<CvSkillDto>>(this.cvSkillDao.getCvSkillDto(cvId));
 	}
+
+	@Override
+	public Result updateCvSkill(int sckillId, int id) {
+		this.cvSkillDao.updateCvSkill(sckillId, id);
+		return new SuccessResult("Beceri bilgileri güncellendi.");
+	}
 }

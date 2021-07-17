@@ -38,4 +38,10 @@ public class SchoolSectionManager implements SchoolSectionService {
 		return new SuccessDataResult<List<SchoolSectionDto>>(this.schoolSectionDao.getSchoolSectionDto(cvId));
 	}
 
+	@Override
+	public Result updateSchoolSection(int schoolId, int sectionId, int id) {
+		this.schoolSectionDao.updateSchoolSection(schoolId, sectionId, id);
+		return new SuccessResult("Okul ve bölüm bilgisi güncellendi");
+	}
+
 }

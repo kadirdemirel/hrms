@@ -70,34 +70,70 @@ public class JobPostingManager implements JobPostingService {
 	}
 
 	@Override
-	public DataResult<PageableDto<List<JobPosting>>> getAll(int pageNo, int pageSize) {
-
-		int a = this.jobPostingDao.findAll().toArray().length;
-
-		if (a % pageSize == 0) {
-			a = a / pageSize;
-		} else {
-			a = a / pageSize + 1;
-		}
-
+	public DataResult<List<JobPosting>> getByFilter(int pageNo, int pageSize, PageableDto pageableDto) {
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
-
-		PageableDto<List<JobPosting>> b = new PageableDto<List<JobPosting>>();
-		b.setListData(this.jobPostingDao.findAll(pageable).getContent());
-		b.setPageNo(pageNo);
-		b.setPageSize(pageSize);
-		b.setSection(a);
-
-		SuccessDataResult<PageableDto<List<JobPosting>>> c = new SuccessDataResult<PageableDto<List<JobPosting>>>(b);
-
-		return c;
-
-	}
-
-	@Override
-	public DataResult<List<JobPosting>> getByCityIdAndTypeOfWorkId(int cityId, int typeOfWorkId) {
 		return new SuccessDataResult<List<JobPosting>>(
-				this.jobPostingDao.getByCityIdAndTypeOfWorkId(cityId, typeOfWorkId));
+				this.jobPostingDao.getByFilter(pageableDto, pageable).getContent(),
+				this.jobPostingDao.getByFilter(pageableDto, pageable).getTotalElements() + "");
 	}
+
+//	@Override
+//	public DataResult<PageableDto<List<JobPosting>>> getAll(int pageNo, int pageSize) {
+//
+//		int a = this.jobPostingDao.findAll().toArray().length;
+//		int z=a;
+//
+//		if (a % pageSize == 0) {
+//			a = a / pageSize;
+//		} else {
+//			a = a / pageSize + 1;
+//		}
+//
+//		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+//
+//		PageableDto<List<JobPosting>> b = new PageableDto<List<JobPosting>>();
+//		b.setListData(this.jobPostingDao.findAll(pageable).getContent());
+//		b.setPageNo(pageNo);
+//		b.setPageSize(pageSize);
+//		b.setSection(a);
+//		b.setTotalData(z);
+//
+//		SuccessDataResult<PageableDto<List<JobPosting>>> c = new SuccessDataResult<PageableDto<List<JobPosting>>>(b);
+//
+//		return c;
+//
+//	}
+
+//	@Override
+//	public DataResult<PageableDto<List<JobPosting>>> getByCityIdAndTypeOfWorkId(int cityId, int typeOfWorkId,
+//			int pageNo, int pageSize) {
+//		int a = this.jobPostingDao.findAll().toArray().length;
+//		int z = a;
+//
+//		if (a % pageSize == 0) {
+//			a = a / pageSize;
+//		} else {
+//			a = a / pageSize + 1;
+//		}
+//
+//		Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+//
+//		PageableDto<List<JobPosting>> b = new PageableDto<List<JobPosting>>();
+//		b.setListData(this.jobPostingDao.findAll(pageable).getContent());
+//		b.setPageNo(pageNo);
+//		b.setPageSize(pageSize);
+//		b.setSection(a);
+//		b.setTotalData(z);
+//
+//		SuccessDataResult<PageableDto<List<JobPosting>>> c = new SuccessDataResult<PageableDto<List<JobPosting>>>(b);
+//
+//		return c;
+//	}
+
+//	@Override
+//	public DataResult<List<JobPosting>> getByCityIdAndTypeOfWorkId(int cityId, int typeOfWorkId) {
+//		return new SuccessDataResult<List<JobPosting>>(
+//				this.jobPostingDao.getByCityIdAndTypeOfWorkId(cityId, typeOfWorkId));
+//	}
 
 }
