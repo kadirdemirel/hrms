@@ -33,6 +33,17 @@ public class Employer extends User {
 
 	@Column(name = "phone")
 	private String phone;
+	
+	@Column(name = "clone_company_name")
+	private String companyNameClone;
+
+
+	@Column(name = "clone_phone")
+	private String phoneClone;
+	
+
+	@Column(name = "status")
+	private boolean status;
 
 	@OneToMany(mappedBy = "employer")
 	private List<JobPosting> jobPostings;

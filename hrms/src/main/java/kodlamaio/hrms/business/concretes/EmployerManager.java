@@ -30,7 +30,6 @@ public class EmployerManager implements EmployerService {
 	@Autowired
 	EmployeService employeService;
 
-
 	@Override
 	public Result add(EmployerForRegisterDto employerForRegisterDto) {
 		var employer = new Employer();
@@ -69,6 +68,18 @@ public class EmployerManager implements EmployerService {
 	}
 
 	@Override
+	public Result updateEmployer(String companyName, String phone,boolean status, int id) {
+		this.employerDao.updateEmployer(companyName, phone,status, id);
+		return new SuccessResult("Güncelleme başarılı");
+	}
+
+	@Override
+	public Result updateEmployerClone(String companyNameClone, String phoneClone,boolean status, int id) {
+		this.employerDao.updateEmployerClone(companyNameClone, phoneClone,status, id);
+		return new SuccessResult("Güncelleme başarılı");
+	}
+
+	@Override
 	public DataResult<List<Employer>> getAll() {
 		return new SuccessDataResult<List<Employer>>(this.employerDao.findAll());
 	}
@@ -82,6 +93,11 @@ public class EmployerManager implements EmployerService {
 
 			return false;
 		}
+	}
+
+	@Override
+	public DataResult<Employer> getById(int id) {
+		return new SuccessDataResult<Employer>(this.employerDao.getById(id));
 	}
 
 }

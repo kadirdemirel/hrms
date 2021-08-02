@@ -13,4 +13,10 @@ public interface EmployerService {
 
 	DataResult<List<Employer>> getAll();
 
+	DataResult<Employer> getById(int id);
+
+	Result updateEmployer(String companyName, String phone,boolean status ,int id);
+
+	Result updateEmployerClone(String companyNameClone, String phoneClone,boolean status, int id);
+
 }
